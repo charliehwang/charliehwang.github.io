@@ -1,25 +1,28 @@
 // import logo from "./logo.svg";
 import "./App.css";
+
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Home from "./Home";
-import Accessibility from "./Learn/Accessibility";
+const Home = React.lazy(() => import("./Home"));
+const Accessibility = React.lazy(() => import("./Learn/Accessibility"));
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        {/* A <Switch> looks through its children <Route>s and
+    <Suspense fallback={<p>Loading...</p>}>
+      <Router>
+        <div className="App">
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/Learn/Accessibility">
-            <Accessibility />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <Route
+              path="/Learn/Accessibility"
+              render={() => <Accessibility />}
+            />
+            <Route exact path="/" render={() => <Home />} />
+          </Switch>
+        </div>
+      </Router>
+    </Suspense>
   );
 }
 
