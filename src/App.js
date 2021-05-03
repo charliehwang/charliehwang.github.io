@@ -2,7 +2,7 @@
 import "./App.css";
 
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 const Home = React.lazy(() => import("./Home"));
 const Accessibility = React.lazy(() => import("./Learn/Accessibility"));
 
